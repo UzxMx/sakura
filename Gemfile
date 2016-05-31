@@ -36,6 +36,7 @@ gem 'compass-rails'
 gem 'bootstrap-sass'
 gem "js-routes"
 
+# It seems that if we remove turbolinks gem, the browserify-rails will not work.(will not load toastr.js)
 gem "browserify-rails"
 
 group :development, :test do
