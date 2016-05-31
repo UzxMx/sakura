@@ -1,0 +1,167 @@
+<h1>设备</h1>
+
+<% device_info = device_parse_info(@device.info) %>
+<div id="devicePrimaryInfoContainer" class="panel panel-primary line-height-big" style="margin-top: 20px;">
+  <span id="deviceId" style="display:none" data-device-id="<%= @device.id %>"></span>
+  <div class="panel-heading">
+    <h3 class="panel-title">Device Primary Info</h3>
+  </div>
+  <div class="panel-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3">
+          <span>Username: <span>
+          <span id="deviceUsername">
+            <%= @device.username %>
+          </span>
+        </div>
+        <div class="col-sm-3">
+          <span>Status: <span>
+          <span id="deviceOnlineStatus">
+            <%= device_online(@device.online) %>
+          </span>
+        </div>
+        <div class="col-sm-3">
+          <span>Locale: </span>
+          <span id="deviceLocale">
+            <%= device_info['locale'] %>
+          </span>
+        </div>
+        <div class="col-sm-3">
+          <span>Timezone: </span>
+          <span>To Be Implemented</span>
+        </div>
+        <div class="col-sm-3">
+          <span>Manufacturer: </span>
+          <span id="deviceManufacturer">
+            <%= device_info['manufacturer'] %>
+          </span> 
+        </div>
+        <div class="col-sm-3">
+          <span>OS: </span>
+          <span id="deviceOS">
+            <%= device_info['os'] %>
+          </span>
+        </div>      
+        <div class="col-sm-3">
+          <span>App Version: </span>
+          <span id="deviceAppVersion">
+            <%= device_info['app_version'] %>
+          </span> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="deviceExtraInfoContainer" class="panel panel-primary line-height-big">
+  <div class="panel-heading">
+    <h3 class="panel-title">Device Extra Info</h3>
+  </div>
+  <div class="panel-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-4">
+          <span>Network Environment: <span>
+          <span id="deviceNetwork">
+            <%= device_network(device_info['network_type']) %>
+          </span>
+        </div>
+        <div class="col-sm-12">
+          <span>Battery Info: <span>
+          <span id="deviceBatteryInfo">
+            <%= device_battery_info(device_info['battery_info']) %>
+          </span>
+        </div>
+        <div class="col-sm-6">
+          <span>Data Cost In Wi-Fi Mode: </span><span>Unknown</span>
+        </div>
+        <div class="col-sm-6">
+          <span>Data Cost In Roaming Mode: </span><span>Unknown</span>
+        </div>
+        <div class="col-sm-6">
+          <span>CPU Usage: </span><span>Unknown</span>
+        </div>
+        <div class="col-sm-6">
+          <span>Memory Usage: </span><span>Unknown</span>
+        </div>      
+        <div class="col-sm-6">
+          <span>Storage Usage: </span><span>Unknown</span>
+        </div>
+        <div class="col-sm-6">
+          <span>Updated at: </span>
+          <span id="deviceUpdatedTime">
+            <%= @device.updated_at.strftime('%Y-%m-%d %H:%M:%S') %>
+          </span>
+        </div>
+        <div class="col-sm-12">
+          <hr />
+        </div>
+        <div class="col-sm-12">
+          <button class="btn btn-primary btn-fetch-new-info"><span class="glyphicon glyphicon-refresh spin"></span><span class="normal-text">获取新的信息</span><span class="spin-text">获取中...</span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="deviceConfigurationContainer" class="panel panel-primary line-height-big">
+  <div class="panel-heading">
+    <h3 class="panel-title">Device Configuration</h3>
+  </div>
+  <div class="panel-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-5">
+          <span>Current Log Level: <span>
+          <%= device_log_level(device_info['log_level']) %>
+        </div>
+        <div class="col-sm-5">
+          <span>Log Sent Freq(in seconds): <span>
+          <%= device_log_sent_freq(device_info['log_sent_freq']) %>
+        </div>
+        <div class="col-sm-2">
+          <button class="btn btn-primary btn-configure-logger">
+            <span class="glyphicon glyphicon-refresh spin"></span><span class="normal-text">修改日志设置</span><span class="spin-text">修改中...</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>
+
+<div id="deviceLogContainer" class="panel panel-primary container-log">
+  <div class="panel-heading">
+    <h3 class="panel-title">Device Log</h3>
+  </div>
+  <div class="panel-body">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12">
+          <button class="btn btn-primary btn-fetch-logs">
+            <span class="glyphicon glyphicon-refresh spin"></span><span class="normal-text">获取日志</span><span class="spin-text">获取中...</span>
+          </button>
+        </div>
+        <div class="col-sm-12">
+          <hr />
+        </div>
+      </div>
+    </div>
+    <div id="deviceLogs" class="container-fluid">
+      <% @logs.each do |log| %>
+      <div class="row">
+        <div class="col-sm-2">
+          <%= log[:name] %>
+        </div>
+        <div class="col-sm-8">
+          <span>modified at <%= log[:mtime] %></span>
+          <span>, size <%= log[:size] %></span>
+        </div>
+        <div class="col-sm-2">
+          <%= link_to 'Download', admin_device_download_log_path(:device_id => @device.id, :file => log[:name]) %>
+        </div>            
+      </div>
+      <% end %>
+    </div>
+  </div>  
+</div>

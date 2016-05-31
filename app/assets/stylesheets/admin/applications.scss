@@ -1,0 +1,23 @@
+// Place all the styles related to the admin/applications controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.content-header {
+  h1 {
+    display: inline-block;
+  }
+
+  .container-actions {
+    display: inline-block;
+    margin-left: 15px;
+  }
+}
+
+#applications {
+  .col-type {
+    width: 30%;
+  }
+
+  .col-date {
+    width: 20%;
+  }
+}

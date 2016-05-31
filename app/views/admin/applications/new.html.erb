@@ -1,0 +1,22 @@
+<div class="content-header">
+  <h1>添加应用</h1>
+  <div class="container-actions"><%= link_to '取消', admin_applications_path %></div>
+</div>
+
+<div style="margin-top: 20px;">
+  <%= form_for(@application, :url => admin_applications_path) do |f| %>
+    <div class="form-group">
+      <%= f.label :name, '名称' %>
+      <div style="max-width: 300px;">
+        <%= f.text_field :name, :autofocus => true, class: 'form-control'%>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= f.label :app_type, '类型' %>
+      <div>
+        <%= f.select :app_type, Application.app_types %>
+      </div>
+    </div>
+    <%= f.submit '添加', :class => 'btn btn-primary' %>
+  <% end %>
+</div>

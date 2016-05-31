@@ -1,0 +1,101 @@
+<h1>设备</h1>
+<div style="margin-top: 20px;">
+  <div>
+    <span id="applicationId" style="display:none;" data-application-id="<%= @application.id %>"></span>
+    <select name="online">
+      <option value="-1"<% if @online.nil? %> selected="selected"<% end %>>所有状态的设备</option>
+      <option value="true"<% if @online %> selected="selected"<% end %>>在线的设备</option>
+      <option value="false"<% if @online == false %> selected="selected"<% end %>>离线的设备</option>
+    </select>
+    <button class="btn btn-primary btn-filter-devices" style="margin-left: 10px;">筛选</button>
+  </div>
+  <div style="margin-top: 5px;">
+  总共<span class="device-total-count"><%= @devices_total_count %></span>个设备
+  </div>
+</div>
+
+<div style="margin-top: 20px;">
+  <table id="devices" class="table">
+    <thead>
+      <tr>
+        <td class="col-order">设备</td>
+        <td class="col-date">最后更新时间</td>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% if @devices.length > 0 %>
+        <% for device in @devices %>
+          <% info = device_parse_info(device.info) %>
+          <tr id="device-<%= device.id %>">
+            <td class="col-device">
+              <div class="row">
+                <div class="col-sm-4">
+                  <span class="col-name">编号：</span>
+                  <span class="col-value"><%= device.id %></span>
+                </div>            
+                <div class="col-sm-8">
+                  <span class="col-name">状态：</span>
+                  <span class="col-value col-status"><%= device_online(device.online) %></span>
+                </div>
+                <div class="col-sm-12 row-actions">
+                  <%= link_to '查看', admin_device_path(device.id) %>
+                </div>
+              </div>
+            </td>
+            <td class="col-date"><%= device.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr><td colspan="3">设备列表为空</td></tr>
+      <% end %>
+
+    </tbody>
+    <tfoot>
+        <td class="col-order">设备</td>
+        <td class="col-date">最后更新时间</td>
+    </tfoot>
+  </table>
+</div>
+
+<div class="container-pagination text-center">
+  <nav>
+    <ul class="pagination">
+
+      <% if @current_page == 1 %>
+      <li class="disabled">
+        <a href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <% else %>
+      <li>
+        <a data-page="<%= @current_page - 1 %>" href="#">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <% end %>
+
+      <% for i in @page_start..@page_end %>
+        <% if i == @current_page %>
+        <li class="active"><a><%= i %></a></li>
+        <% else %>
+        <li><a data-page="<%= i %>" href="#"><%= i %></a></li>
+        <% end %>
+      <% end %>
+
+      <% if @current_page == @page_num %>
+      <li class="disabled">
+        <a href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+      <% else %>
+      <li>
+        <a data-page="<%= @current_page + 1 %>" href="#"><span aria-hidden="true">&raquo;</span></a>
+      </li>
+      <% end %>
+
+    </ul>
+  </nav>
+</div>

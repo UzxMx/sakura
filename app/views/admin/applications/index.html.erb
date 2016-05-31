@@ -1,0 +1,52 @@
+<div class="content-header">
+  <h1>应用</h1>
+  <div class="container-actions"><%= link_to '添加', new_admin_application_path %></div>
+</div>
+
+<div style="margin-top: 20px;">
+  <table id="applications" class="table">
+    <thead>
+      <tr>
+        <td class="col-application">应用</td>
+        <td class="col-type">类型</td>
+        <td class="col-date">创建时间</td>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% if @applications.length > 0 %>
+        <% for application in @applications %>
+          <tr id="application-<%= application.id %>">
+            <td class="col-application">
+              <div class="row">
+                <div class="col-sm-12">
+                  <span class="col-name">名称：</span>
+                  <span class="col-value"><%= application.name %></span>
+                </div>            
+                <div class="col-sm-12 row-actions">
+                  <%= link_to '查看', admin_application_devices_path(application.id) %>
+                </div>
+              </div>
+            </td>
+            <td class="col-type">
+              <div class="row">
+                <div class="col-sm-12">
+                    <span class="col-value"><%= t(application.app_type) %></span>
+                </div>
+              </div>
+            </td>
+            <td class="col-date"><%= application.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr><td colspan="3">当前没有应用</td></tr>
+      <% end %>
+
+    </tbody>
+    <tfoot>
+        <td class="col-application">应用</td>
+        <td class="col-type">类型</td>
+        <td class="col-date">创建时间</td>
+    </tfoot>
+  </table>
+</div>
