@@ -22,7 +22,11 @@
                 <div class="col-sm-12">
                   <span class="col-name">名称：</span>
                   <span class="col-value"><%= application.name %></span>
-                </div>            
+                </div>
+                <div class="col-sm-12">
+                  <span class="col-name">编号：</span>
+                  <span class="col-value"><%= application.app_id %></span>
+                </div>                            
                 <div class="col-sm-12 row-actions">
                   <%= link_to '查看', admin_application_devices_path(application.id) %>
                 </div>

@@ -143,9 +143,7 @@ class Admin::DevicesController < ApplicationController
       rescue Exception => e
       end
 
-      files.sort do |x, y|
-        y <=> x
-      end
+      files = files.sort { |x, y| y <=> x }
 
       logs = []
       files.each do |file|
