@@ -1,4 +1,11 @@
 <h1>设备</h1>
+<div style="margin-top: 20px;" class="breadcrumb">
+  <%= link_to '应用', admin_applications_path, class: "breadcrumb-link" %>
+  <span class="breadcrumb-separator">/</span>
+  <%= link_to @application.name, admin_application_devices_path(@application.id), class: "breadcrumb-link" %>
+  <span class="breadcrumb-separator">/</span>
+  <%= link_to '设备', '#', class: "breadcrumb-link" %>  
+</div> 
 
 <% device_info = device_parse_info(@device.info) %>
 <div id="devicePrimaryInfoContainer" class="panel panel-primary line-height-big" style="margin-top: 20px;">

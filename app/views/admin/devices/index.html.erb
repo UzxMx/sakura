@@ -1,4 +1,9 @@
 <h1>设备</h1>
+<div style="margin-top: 20px;" class="breadcrumb">
+  <%= link_to '应用', admin_applications_path, class: "breadcrumb-link" %>
+  <span class="breadcrumb-separator">/</span>
+  <%= link_to @application.name, '#', class: "breadcrumb-link" %>
+</div>  
 <div style="margin-top: 20px;">
   <div>
     <span id="applicationId" style="display:none;" data-application-id="<%= @application.id %>"></span>
@@ -26,15 +31,45 @@
 
       <% if @devices.length > 0 %>
         <% for device in @devices %>
-          <% info = device_parse_info(device.info) %>
+          <% device_info = device_parse_info(device.info) %>
           <tr id="device-<%= device.id %>">
             <td class="col-device">
               <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-6">
+                  <span class="col-name">生产商: </span>
+                  <span id="deviceManufacturer" class="col-value">
+                    <%= device_info['manufacturer'] %>
+                  </span> 
+                </div>
+                <div class="col-sm-6">
+                  <span class="col-name">Username: <span>
+                  <span id="deviceUsername" class="col-value">
+                    <%= device.username %>
+                  </span>
+                </div>                
+                <div class="col-sm-6">
+                  <span class="col-name">OS: </span>
+                  <span id="deviceOS" class="col-value">
+                    <%= device_info['os'] %>
+                  </span>
+                </div>
+                <div class="col-sm-6">
+                  <span class="col-name">Locale: </span>
+                  <span id="deviceLocale" class="col-value">
+                    <%= device_info['locale'] %>
+                  </span>
+                </div>                   
+                <div class="col-sm-6">
+                  <span class="col-name">App Version: </span>
+                  <span id="deviceAppVersion" class="col-value">
+                    <%= device_info['app_version'] %>
+                  </span> 
+                </div>                
+                <div class="col-sm-6">
                   <span class="col-name">编号：</span>
                   <span class="col-value"><%= device.id %></span>
                 </div>            
-                <div class="col-sm-8">
+                <div class="col-sm-6">
                   <span class="col-name">状态：</span>
                   <span class="col-value col-status"><%= device_online(device.online) %></span>
                 </div>

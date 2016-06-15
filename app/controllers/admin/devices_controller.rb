@@ -58,11 +58,13 @@ class Admin::DevicesController < ApplicationController
   end
 
   def show
+    # TODO eager load device's application
     device = Device.find(params[:device_id].to_i)
 
     logs = get_logs
 
     @device = device
+    @application = device.application
     @logs = logs
   end
 
