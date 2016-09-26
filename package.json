@@ -9,5 +9,8 @@
   "license": "MIT",
   "engines": {
     "node": ">= 0.10"
+  },
+  "devDependencies": {
+    "d3": "^4.0.0-alpha.49"
   }
 }

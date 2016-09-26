@@ -17,16 +17,17 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3">
-          <span>Username: <span>
+          <span>Username: </span>
           <span id="deviceUsername">
             <%= @device.username %>
           </span>
         </div>
         <div class="col-sm-3">
-          <span>Status: <span>
+          <span>Status: </span>
           <span id="deviceOnlineStatus">
             <%= device_online(@device.online) %>
           </span>
+          <%= link_to '状态统计', admin_device_status_stats_path(@device.id), class: 'btn btn-info' %>
         </div>
         <div class="col-sm-3">
           <span>Locale: </span>
@@ -38,6 +39,8 @@
           <span>Timezone: </span>
           <span>To Be Implemented</span>
         </div>
+      </div>
+      <div class="row">
         <div class="col-sm-3">
           <span>Manufacturer: </span>
           <span id="deviceManufacturer">

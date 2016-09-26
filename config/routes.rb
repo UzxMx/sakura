@@ -24,5 +24,7 @@ Rails.application.routes.draw do
     get 'devices/:device_id/download/:file' => 'devices#download_log', as: :device_download_log
 
     post 'devices/:device_id/configure_logger' => 'devices#configure_logger', as: :device_configure_logger
+
+    get 'devices/:device_id/status_stats' => 'devices#status_stats', as: :device_status_stats
   end
 end

@@ -113,6 +113,14 @@ class Admin::DevicesController < ApplicationController
     }
   end
 
+  def status_stats
+    # TODO eager load device's application
+    device = Device.find(params[:device_id].to_i)
+
+    @device = device
+    @application = device.application
+  end
+
   private
     def pagination(page_num, current_page, showed_num)
       page_start = 1
