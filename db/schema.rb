@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160530094631) do
+ActiveRecord::Schema.define(version: 20160617155407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,14 +43,15 @@ ActiveRecord::Schema.define(version: 20160530094631) do
   end
 
   create_table "devices", force: :cascade do |t|
-    t.integer  "application_id",              null: false
-    t.string   "device_id",                   null: false
-    t.string   "auth_token",     default: "", null: false
-    t.string   "username",       default: "", null: false
+    t.integer  "application_id",                null: false
+    t.string   "device_id",                     null: false
+    t.string   "auth_token",     default: "",   null: false
+    t.string   "username",       default: "",   null: false
     t.boolean  "online"
-    t.string   "info",           default: "", null: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.string   "info",           default: "",   null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "status_records", default: "{}"
     t.index ["application_id"], name: "index_devices_on_application_id", using: :btree
   end
 
