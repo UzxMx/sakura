@@ -40,3 +40,8 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/syst
 # set :ssh_options, verify_host_key: :secure
 
 set :rvm_ruby_version, File.read('.ruby-version').strip
+
+set :nvm_node, 'v8.11.3'
+set :nvm_map_bins, fetch(:nvm_map_bins, []).push('rake', 'puma')
+
+set :nginx_template, File.expand_path("../nginx/#{fetch(:stage)}.conf.erb", __FILE__)

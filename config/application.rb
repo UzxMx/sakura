@@ -8,6 +8,18 @@ Bundler.require(*Rails.groups)
 
 module Sakura
   class Application < Rails::Application
+    config.before_configuration do
+      env_file = Rails.root.join('config', 'local_env.yml')
+      if File.exist?(env_file)
+        result = YAML.load(File.read(env_file))
+        if result.is_a?(Hash)
+          result.each do |key, value|
+            ENV[key.to_s] = value.try(&:to_s) || ''
+          end
+        end
+      end
+    end
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
