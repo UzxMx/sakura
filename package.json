@@ -4,13 +4,11 @@
     "browserify": "~10.2.4",
     "browserify-incremental": "^3.0.1",
     "dateformat": "^1.0.12",
-    "toastr": "^2.1.2"
+    "toastr": "^2.1.2",
+    "d3": "^4.13.0"
   },
   "license": "MIT",
   "engines": {
     "node": ">= 0.10"
-  },
-  "devDependencies": {
-    "d3": "^4.0.0-alpha.49"
   }
 }

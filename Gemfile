@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '~> 2.2.9'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '>= 5.0.0.rc1', '< 5.1'
@@ -49,6 +50,8 @@ group :development do
   gem 'capistrano-rails-console', '~> 2.2', require: false
   gem 'capistrano-rails-tail-log', '~> 0.1.0', require: false
   gem 'capistrano-rvm', '~> 0.1.2', require: false
+  gem 'capistrano-npm', '~> 1.0', require: false
+  gem 'capistrano-nvm', '~> 0.0.7', require: false
   gem 'capistrano3-nginx', '~> 2.1', require: false
   gem 'capistrano3-puma', '~> 3.1', require: false
 

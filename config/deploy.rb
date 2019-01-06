@@ -22,7 +22,7 @@ set :deploy_to, '/home/webuser/deploy/sakura'
 
 # Default value for :linked_files is []
 # append :linked_files, "config/database.yml"
-append :linked_files, 'config/database.yml'
+append :linked_files, 'config/database.yml', 'config/local_env.yml'
 
 # Default value for linked_dirs is []
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system'
@@ -38,3 +38,10 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/syst
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
+
+set :rvm_ruby_version, File.read('.ruby-version').strip
+
+set :nvm_node, 'v8.11.3'
+set :nvm_map_bins, fetch(:nvm_map_bins, []).push('rake', 'puma', 'rails')
+
+set :nginx_template, File.expand_path("../nginx/#{fetch(:stage)}.conf.erb", __FILE__)
